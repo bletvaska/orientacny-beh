@@ -26,7 +26,7 @@
                 <!-- body -->
                 <div class="body">
                     <!-- less than 3 categories -->
-                    <div class="content" v-if="categories.length <= 3">
+                    <div class="content" v-if="categories.length <= 7">
                         <grid>
                             <widget v-for="category in categories">
                                 <template v-slot:header>
@@ -46,8 +46,21 @@
                     <!-- less than 3 categories -->
 
                     <!-- more than 3 categories -->
-                    <div class="content" v-if="categories.length > 3">
-                        <slider timeout="10000" v-on:slide="categoryRotate()">
+                    <div class="content" v-if="categories.length > 7">
+                        <slider timeout="30000" v-on:slide="categoryRotate()">
+                            <!-- <widget>
+                                <template v-slot:header>
+                                    <h2>{{ categories[0].name }}</h2>
+                                </template>
+                                <template>
+                                    <results-list :items="getResults(categories[0].slug, 0, settings.results.staticPlacesCount)" :settings="settings.results"></results-list>
+                                </template>
+                                <template v-slot:footer>
+                                    <scroll>
+                                        <results-list :items="getResults(categories[0].slug, settings.results.staticPlacesCount, 10000)" :settings="settings.results"></results-list>
+                                    </scroll>
+                                </template>
+                            </widget> -->
                             <widget v-for="category in categories">
                                 <template v-slot:header>
                                     <h2>{{ category.name }}</h2>

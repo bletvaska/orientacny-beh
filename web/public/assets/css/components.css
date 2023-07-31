@@ -23,25 +23,32 @@
 /* list */
 
 /* results-list */
-#results-list {width: 100%; overflow: hidden;}
-#results-list > .item {padding: 3px}
-#results-list > .item:nth-child(2n+1) {background-color: gainsboro}
-#results-list .data {margin-right: 5px; display: flex; align-items: center;}
-#results-list .data:last-child {margin-right: 0}
-#results-list .data-ranking {width: 25px; justify-content: flex-end; margin-right: 10px}
-#results-list .data-racer {flex-grow: 2;}
-#results-list .data-racer .data-name {font-size: 16px; font-weight: bold; }
-#results-list .data-racer .data-club {font-size: 14px; margin-top: 5px}
-#results-list .data-country {width: 50px; justify-content: center}
-#results-list .data-country > img {width: 50px}
-#results-list .data-time {width: 75px; justify-content: center}
+.results-list {width: 100%; overflow: hidden;}
+.results-list > .item {padding: 3px; line-height: 16px;}
+.results-list > .item:nth-child(2n+1) {background-color: rgba(0,0,0,0.1)}
+.results-list .data {display: flex; align-items: center;}
+.results-list .data:last-child {margin-right: 0}
+.results-list .data-ranking {width: 10%; justify-content: center; margin-right: 5px;}
+.results-list .data-competitor {flex: 1; overflow: hidden; }
+.results-list .data-competitor .data-racer {width: 100%; overflow: hidden;}
+.results-list .data-competitor .data-racer .data-surname {font-size: 14px; font-weight: bold; margin-right: 5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.results-list .data-competitor .data-racer .data-name {font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.results-list .data-competitor .data-club {font-size: 10px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
+.results-list .data-times {font-size: 12px}
+.results-list .data-times .time-total {font-weight: bold; margin-right: 5px;}
+.results-list .data-country {width: 40px; justify-content: center; overflow: hidden; margin-left: 5px}
+.results-list .data-country > img {width: 40px}
+
+.body > .results-list > li:first-child {background-color: gold;}
+.body > .results-list > li {background-color: silver;}
+.body > .results-list > li:last-child {background-color: goldenrod;}
 /* results-list */
 
 /* slider */
 .slider {display: block; height: 100%; overflow: hidden; }
 .slider > .view {display: block; position: relative; height: 100%}
 .slider > .view > .content {display: flex; height: calc(100% - 20px); margin: 10px}
-.slider > .view > .content > .widget {margin-right: 10px; min-width: 33%; opacity: 1; transition: opacity 0.2s}
+.slider > .view > .content > .widget {margin-right: 10px; min-width: calc(100% / 7.22); opacity: 1; transition: opacity 0.2s}
 .slider > .view > .content > .widget:last-child {margin-right: 0}
 /* slider */
 
@@ -52,3 +59,9 @@
 .grid > .view > .content > .widget {margin-right: 10px; width: 100%;}
 .grid > .view > .content > .widget:last-child {margin-right: 0}
 /* grid */
+
+.scroll .item {
+	transition-duration: .25s;
+	transition-property: translate;
+	transition-delay: 0s;
+}

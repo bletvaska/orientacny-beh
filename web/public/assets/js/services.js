@@ -92,8 +92,9 @@ const JSONDataService = {
         return {
             ranking:        typeof item.pos !== "undefined" ? item.pos: '-',
             racer: {
-                name:       typeof item.competitor !== "undefined" ? item.competitor : '-',
-                club:       club.length > 20 ? club.substr(0, 20) + " ..." : club,
+                name:       typeof item.firstname !== "undefined" ? item.firstname : '-',
+                surname:    typeof item.lastname !== "undefined" ? item.lastname : '-',
+                club:       club,
                 country:    typeof item.country !== "undefined" ? item.country : '-'
             },
             time: {

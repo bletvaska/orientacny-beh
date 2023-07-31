@@ -36,6 +36,6 @@ module.exports = {
   race: {
     id: envVars.RACE_ID,
     stageId: envVars.RACE_STAGE_ID,
-    catetgories: envVars.RACE_CATEGORIES
+    categories: envVars.RACE_CATEGORIES
   }
 };

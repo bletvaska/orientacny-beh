@@ -9,13 +9,13 @@ window.app = new Vue({
         categories: [],
         settings: {
             ajax: {
-                url: "http://localhost:8080/api/data",
+                url: "http://192.168.0.5:8080/api/data",
                 interval: 30000,
                 timeout: 0
             },
             results: {
                 staticPlacesCount: 3,
-                displayClub: true,
+                displayClub: false,
                 displayCountry: true
             }
         },
