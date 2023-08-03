@@ -35,7 +35,8 @@ Vue.component('scroll', {
             viewHeight: 0,
             childHeight: 0,
             childCurrentPosition: 0,
-            childActiveIndex: 0
+            childActiveIndex: 0,
+            movesCurrent: 0
         }
     },
     computed: {
@@ -97,24 +98,22 @@ Vue.component('scroll', {
 
         this.animation.interval = setInterval(function(){
             if(self.childHeight > self.viewHeight){
-                const slides = self.$children[0].$el.childNodes;
+                const $slider = self.$children[0];
+                const slides = $slider.$el.childNodes;
                 if(typeof slides !== "undefined"){
-                    const lastIndex = slides.length - 1;
-                    
-                    slides.forEach(slide => {
+                    let movesTotal = slides.length;
+                    for(let index = 0; index < movesTotal; index++){
+                        const slide = slides[index];
                         const slideHeight = slide.clientHeight;
-                        const slidePosition = parseInt(slide.style.translate.split(" ")[1]) || 0;
-                        const slideNewPosition = slidePosition - slideHeight;
-                        slide.style.opacity = 1;
-                        slide.style.translate = "0px "+slideNewPosition+"px";
-                    });
-
-                    const hiddenSlide = slides[self.childActiveIndex];
-                    let hiddenSlideNewPosition = ((lastIndex - self.childActiveIndex) * hiddenSlide.clientHeight);
-                    hiddenSlide.style.translate = "0px "+hiddenSlideNewPosition+"px";
-                    hiddenSlide.style.opacity = 0;
-                    
-                    self.childActiveIndex = self.childActiveIndex === lastIndex ? 0 : self.childActiveIndex + 1;
+                        if(index < self.movesCurrent){
+                            let slideNewPosition = ((movesTotal - self.movesCurrent) * slideHeight) - slideHeight;
+                            slide.style.translate = "0px "+slideNewPosition+"px";
+                        } else {
+                            let slideNewPosition = (self.movesCurrent + 1) * slideHeight;
+                            slide.style.translate = "0px -"+slideNewPosition+"px";
+                        }
+                    }
+                    self.movesCurrent = self.movesCurrent < movesTotal ? self.movesCurrent + 1 : 0;
                 }
             } else {
                 clearInterval(self.animation.interval);
