@@ -23,81 +23,26 @@ Vue.component('results-list', {
 });
 
 Vue.component('scroll', {
-    // up-down for now
     template: '<div :id="uuid" class="scroll"><slot></slot></div>',
     data: function(){
         return {
             uuid: null,
             animation: {
-                interval: null,
-                direction: "up"
+                interval: null
             },
-            viewHeight: 0,
-            childHeight: 0,
-            childCurrentPosition: 0,
-            childActiveIndex: 0,
             movesCurrent: 0
         }
-    },
-    computed: {
-        maxScroll: function(){
-            return this.childHeight - this.viewHeight;
-        }
-    },
-    watch: {
-        // childCurrentPosition: function(){
-        //     if(this.animation.direction === "up"){
-        //         if(this.childCurrentPosition > this.maxScroll){
-        //             this.toggleDirection();
-        //         }
-        //     }
-        //     if(this.animation.direction === "down"){
-        //         if(this.childCurrentPosition < 0){
-        //             this.toggleDirection();
-        //         }
-        //     }
-        // }
-    },
-    methods: {
-        toggleDirection: function(){
-            this.animation.direction = this.animation.direction === 'up' ? 'down' : 'up';
-        },
-        determineChildHeight: function(){
-            this.childHeight = this.$children[0].$el.clientHeight;
-        },
-        determineParentHeight: function(){
-            this.viewHeight = this.$parent.$el.children[2].clientHeight
-        }
-        // resetScroll
     },
     created: function(){
         this.uuid = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
     },
     mounted: function(){
         var self = this;
-        setTimeout(function(){
-            self.determineChildHeight();
-            self.determineParentHeight();
-        }, 100);
-        window.addEventListener('resize', function(){
-            self.determineChildHeight();
-            self.determineParentHeight();
-        });
-
-        // this.animation.interval = setInterval(function(){
-        //     if(self.childHeight > self.viewHeight){
-        //         if(self.animation.direction === 'up'){
-        //             self.childCurrentPosition += 1;
-        //         } else {
-        //             self.childCurrentPosition -= 1;
-        //         }
-        //         self.$children[0].$el.style.marginTop = "-" + self.childCurrentPosition + "px";
-        //     } else {
-        //         clearInterval(self.animation.interval);
-        //     }
-
         this.animation.interval = setInterval(function(){
-            if(self.childHeight > self.viewHeight){
+            const viewHeight = self.$parent.$el.children[2].clientHeight;
+            const childHeight = self.$children[0].$el.clientHeight;
+            
+            if(childHeight > viewHeight){
                 const $slider = self.$children[0];
                 const slides = $slider.$el.childNodes;
                 if(typeof slides !== "undefined"){
