@@ -39,10 +39,18 @@ Vue.component('scroll', {
     mounted: function(){
         var self = this;
         this.animation.interval = setInterval(function(){
-            const viewHeight = self.$parent.$el.children[2].clientHeight;
-            const childHeight = self.$children[0].$el.clientHeight;
+            const $slider = self.$children[0];
+            const slides = $slider.$el.childNodes;
             
-            if(childHeight > viewHeight){
+            let viewHeight = self.$parent.$el.clientHeight;
+            let slidesHeight = 0;
+            if(slides.length > 0){
+                slides.forEach(slide => {
+                    slidesHeight += slide.clientHeight
+                });
+            }
+            
+            if(viewHeight < slidesHeight){
                 const $slider = self.$children[0];
                 const slides = $slider.$el.childNodes;
                 if(typeof slides !== "undefined"){
