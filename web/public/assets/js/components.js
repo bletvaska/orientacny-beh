@@ -11,7 +11,7 @@ Vue.component('results-list', {
     template: '<ul class="list layout layout-vertical results-list"><li v-for="item in items" class="item"><ul class="list layout layout-horizontal"><li class="data data-ranking">{{ item.ranking }}</li><li class="data data-competitor"><ul class="list layout layout-vertical"><li class="data data-racer"> <ul class="list layout layout-horizontal"><li class="data data-surname">{{ item.racer.surname }}</li><li class="data data-name">{{ item.racer.name }}</li></ul></li><li class="data data-club" v-if="settings.displayClub">{{ item.racer.club }}</li><li class="data data-times"><ul class="list layout layout-horizontal"><li class="data data-time time-total">{{ item.time.total }}</li><li class="data data-time time-diff">{{ item.time.diff }}</li></ul></li></ul></li><li class="data data-country" v-if="settings.displayCountry"><img v-if="hasFlag(item.racer.country)" :src="getFlag(item.racer.country)" alt="flag" :style="{ width: getFlagWidth()}"> <span v-else class="text">{{ item.racer.country }}</span></li></ul></li></ul>',
     methods: {
         hasFlag: function(iso3code){
-            return flags.hasOwnProperty(iso3code.toLowerCase());
+            return iso3code !== null ? flags.hasOwnProperty(iso3code.toLowerCase()) : false;
         },
         getFlag: function(iso3code){
             return flags[iso3code.toLowerCase()];
